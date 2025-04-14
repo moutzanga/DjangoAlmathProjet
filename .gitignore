@@ -1,0 +1,36 @@
+# .gitignore
+
+# Environnement virtuel
+.venv/
+env/
+ENV/
+venv/
+
+# Fichiers compilés Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Fichiers Django
+db.sqlite3
+*.sqlite3
+*.log
+*.pot
+
+# Paramètres secrets
+*.env
+.env
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Static files
+/staticfiles/
+/media/
+
+# Fichiers de migration auto-générés
+**/migrations/*.pyc
+**/migrations/__pycache__/
