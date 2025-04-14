@@ -34,3 +34,5 @@ db.sqlite3
 # Fichiers de migration auto-générés
 **/migrations/*.pyc
 **/migrations/__pycache__/
+
+.env
