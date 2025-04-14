@@ -1,0 +1,92 @@
+
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+ /* Container pour centrer la box */
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    /* Box contenant la photo et les infos */
+    .user-box {
+        margin-top:10px;
+        width: 600px;
+        height: 3000px;
+        background-color: #f9f9f9;
+        border-radius: 15px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    /* Box photo */
+    .photo-box {
+        width: 200px;
+        height: 200px;
+        background-color: #e0f7fa;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Image photo */
+    .photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+    /* Placeholder photo (si pas de photo) */
+    .placeholder {
+        background-color: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+    }
+
+    /* Informations utilisateur */
+    .user-info h3 {
+        margin: 10px 0;
+        color: #094df4;
+        text-align: center;
+        font-size: 18px;
+    }
+</style>
+<main style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+
+    <!-- Box utilisateur -->
+    <div class="user-box">
+        <!-- Photo -->
+        <div class="photo-box">
+            {% if user.photo %}
+                <img src="{{ user.photo.url }}" alt="Photo de profil" class="photo">
+            {% else %}
+                <div class="photo placeholder">
+                    <span style="color: #666;">Pas de photo</span>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Informations utilisateur -->
+        <div class="user-info">
+            <h3>{{ user.nom }} {{ user.prenom }}</h3>
+            <h3>{{ user.profil }}</h3>
+            <h3>{{ user.agence }}</h3>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

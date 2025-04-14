@@ -1,0 +1,172 @@
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #229954;
+            color: white;
+            padding: 1em 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Wrapper for top part of the header (title + user info) */
+        .header-top-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1em;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+
+        header h1 {
+            margin: 0;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info span {
+            font-size: 0.9em;
+        }
+
+        .user-photo {
+            width: 60px;
+            height: 60px;
+            background-color: #ddd;
+            border-radius: 50%;
+            border: 2px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-size: 0.7em;
+            color: #333;
+            text-align: center;
+        }
+
+
+        .menu-bar {
+            background-color: #006400;
+            padding: 0 1em;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Menu Item Container */
+        .menu-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-item > a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8em 1em;
+            margin: 0 0.5em;
+            display: block;
+        }
+
+         .menu-item > a:hover,
+         .menu-item:hover > a
+          {
+            background-color: #004000;
+        }
+
+
+        .menu-bar .logout {
+            margin-left: auto;
+            padding: 0.8em 1em;
+             color: white;
+            text-decoration: none;
+        }
+         .menu-bar .logout:hover {
+             background-color: #004000;
+         }
+
+
+        /* Submenu Styles */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0.5em;
+            background-color: #004000;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: 200px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1100;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .menu-item:hover .submenu {
+            display: block;
+        }
+
+        .submenu li {
+            border-bottom: 1px solid #006400;
+        }
+         .submenu li:last-child {
+             border-bottom: none;
+         }
+
+        .submenu li a {
+            color: white;
+            text-decoration: none;
+            padding: 0.8em 1em;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .submenu li a:hover {
+            background-color: #229954;
+        }
+
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            background-color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #006400;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+        }

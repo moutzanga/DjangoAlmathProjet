@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="container" style="width: 98%; margin: auto; background-color: #b1f7c6; padding: 20px; border-radius: 10px;">
+
+    <h2 style="text-align: center; color:#047024; margin-bottom: 10px; margin-top: 5px;">Mise à Jour des Utilisateurs</h2>
+
+    <!-- Tableau des utilisateurs -->
+    <table style="width: 100%; border-collapse: collapse; background-color: white;">
+        <thead style="background-color: #229954; color: white;">
+            <tr>
+                <th>Photo</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Profil</th>
+                <th>Agence</th>
+                <th>Identifiant</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in page_obj %}
+            <tr style="text-align: center; {% if forloop.counter|divisibleby:2 %}background-color: #e3f9e9;{% endif %}">
+                <td>
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" alt="Photo" width="50" height="50" style="border-radius: 50%; object-fit: cover;">
+                    {% else %}
+                        <span style="color: gray;">Aucune</span>
+                    {% endif %}
+                </td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.profil }}</td>
+                <td>{{ user.agence }}</td>
+                <td>{{ user.identifiant }}</td>
+                <td>
+                    <a href="{% url 'modifier_utilisateur' user.id %}" class="btn btn-edit">Modifier</a>
+                    <a href="{% url 'supprimer_utilisateur' user.id %}" class="btn btn-delete" onclick="return confirm('Supprimer cet utilisateur ?');">Supprimer</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="8" style="text-align: center;">Aucun utilisateur trouvé.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination" style="text-align: center; margin-top: 15px;">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Première</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Précédente</a>
+            {% endif %}
+
+            <span class="current" style="margin: 0 10px;">
+                Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Suivante</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Dernière &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+</div>
+
+<!-- Bouton CSS -->
+<style>
+    .btn {
+        padding: 6px 12px;
+        margin: 2px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.9em;
+    }
+
+    .btn-edit {
+        background-color: #27ae60;
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: #1e8449;
+    }
+
+    .btn-delete {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color: #c0392b;
+    }
+</style>
+{% endblock %}

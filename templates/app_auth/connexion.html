@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almath-change 2025</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #229954; /* Teal color */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        .menu-bar {
+            background-color: #006400; /* Dark Green */
+            padding: 0.5em 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .menu-bar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5em 1em;
+            margin: 0 0.5em;
+        }
+
+        .menu-bar a:hover {
+            background-color: #004000; /* Darker Green */
+        }
+
+        .menu-bar .logout {
+            margin-left: auto; /* Push Logout to the right */
+        }
+
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .box1 {
+            width: 100%;
+            background-color: #b8facb;
+            margin-bottom: 5px; /* Add some space between the boxes */
+            padding: 10px; /* Add some padding inside the box */
+            color: #035019;
+        }
+
+        .box1 h1 {
+            color: #034913;
+        }
+
+        .box2 {
+            width: 100%;
+            background-color: #e5fab8;
+            padding: 10px; /* Add some padding inside the box */
+            color: #035019;
+        }
+
+        .login-box {
+            background-color: #5bc373;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: white;
+            font-weight:bold;
+            background-color: #064d16;
+            text-align:center;
+        }
+
+        .login-box form label {
+            font-weight: bold;
+            color: #064d16;
+            display: block;
+            margin-bottom: 5px;
+
+        }
+
+        .login-box form input, .login-box form select {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-box form button {
+            width: 100%;
+            background-color: #064d16;
+            color: white;
+            padding: 10px;
+            border: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .login-box form button:hover {
+            background-color: #1d8348;
+        }
+
+        .alert {
+            margin-top: 10px;
+        }
+
+        footer {
+            background-color: #006400; /* Dark Green */
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Almath-change 2025</h1>
+        <nav class="menu-bar">
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#"></a>
+            <a href="#" class="logout"></a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="login-box">
+            <h2>Authentification Utilisateur</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    {% if forloop.first %}
+                        <div class="alert">
+                            <div style="color: #dc3545; background-color: #f8d7da; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                                {{ message }}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <form method="post" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="profil">Profil</label>
+                    <select name="profil" id="profil" class="form-control" required>
+                        <option value="">Sélectionner un profil</option>
+                        <option value="Caissier">Caissier</option>
+                        <option value="Rapporteur">Rapporteur</option>
+                        <option value="Chef Agence">Chef Agence</option>
+                        <option value="Administrateur">Administrateur</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Identifiant</label>
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Votre identifiant" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="form-control" placeholder="Votre mot de passe" required>
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        @2025- Tous droits réservés - NOGEX Technologies - Téléphone: +242 055400012 Pointe-Noire Congo
+    </footer>
+</body>
+</html>

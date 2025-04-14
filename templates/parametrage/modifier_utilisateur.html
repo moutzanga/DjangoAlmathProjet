@@ -1,0 +1,212 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main style="overflow-y: auto; max-height: 100vh;">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+
+        .form-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            background-color: #bdecc8;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-sizing: border-box;
+        }
+
+        .form-container h1 {
+            color: #074f17;
+            margin-bottom: 10px;
+            margin-top:0px;
+            font-size: 2em;
+            text-align: center;
+        }
+
+        .form-and-image-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        form#user-form {
+            flex: 2;
+            width: 70%;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #146629;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="file"] {
+            padding: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            width: 125%;
+            justify-content: center;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            background-color: #074f17;
+            color: white;
+            cursor: pointer;
+            margin-bottom:1px;
+        }
+
+        .btn:hover {
+            background-color: #053810;
+        }
+
+        #image-placeholder {
+            width: 200px;
+            height: auto;
+            background-color: #e9f5ec;
+            padding: 10px;
+            border: 2px dashed #074f17;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #image-placeholder img {
+            width: 180px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        #image-placeholder p {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .alert {
+            background: #fdd;
+            border: 1px solid #e33;
+            padding: 10px;
+            border-radius: 5px;
+            color: #900;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <div class="form-container">
+        <h1>Modification Utilisateur</h1>
+
+        {% if form.errors %}
+            <div class="alert">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li><strong>{{ field.label }} </strong> {{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="form-and-image-wrapper">
+            <form id="user-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.identifiant.id_for_label }}">Identifiant</label>
+                        {{ form.identifiant }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.nom.id_for_label }}">Nom</label>
+                        {{ form.nom }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.prenom.id_for_label }}">Prénom</label>
+                        {{ form.prenom }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.telephone.id_for_label }}">Téléphone</label>
+                        {{ form.telephone }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.agence.id_for_label }}">Agence</label>
+                        {{ form.agence }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.profil.id_for_label }}">Profil</label>
+                        {{ form.profil }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_password">Mot de passe</label>
+                        <input type="password" name="password" id="id_password"
+                               class="form-control"
+                               placeholder="Laisser vide pour ne pas changer le mot de passe.">
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.photo.id_for_label }}">Photo</label>
+                        {{ form.photo.as_widget|safe }}
+                    </div>
+                </div>
+
+                <div class="button-container">
+                    <button type="submit" class="btn">Modifier Utilisateur</button>
+                </div>
+            </form>
+
+            <div id="image-placeholder">
+                {% if utilisateur.photo %}
+                    <img src="{{ utilisateur.photo.url }}" alt="Photo de l'utilisateur">
+                    <p>{{ utilisateur.photo.name }}</p>
+                {% else %}
+                    <p>Aucune photo disponible</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

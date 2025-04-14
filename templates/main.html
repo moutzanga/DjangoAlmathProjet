@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almath-change 2025</title>
+    <link href="{%static 'css/style.css' %}" rel="stylesheet">
+    <link href="{%static 'css/bootstrap.mini.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-top-content">
+            <h1>Almath-change 2025</h1>
+            <div class="user-info">
+                <span>{{ user.profil }}</span>
+                <span>{{ user.prenom }}</span>
+                <div class="user-photo">
+
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" alt="Photo utilisateur" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/default-user.png' %}" alt="Photo utilisateur par défaut" style="width: 100%; height: 100%; object-fit: cover;">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <nav class="menu-bar">
+
+            {% if user.profil == 'Administrateur' or user.profil == 'Caissier' %}
+            <div class="menu-item">
+                <a href="#">Clients</a>
+                <ul class="submenu">
+                    <li><a href="{% url 'enregistrer_client_physique' %}">Enregistrer Client Physique</a></li>
+                    <li><a href="{% url 'enregistrer_client_moral' %}">Enregistrer Client Morale</a></li>
+                    <li><a href="{% url 'recherche_client' %}">Rechercher Client</a></li>
+                    <li><a href="{% url 'achat_devise' %}">Achat Devise</a></li>
+                    <li><a href="{% url 'vente_devise' %}">Vente Devise</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if user.profil == 'Administrateur' or user.profil == 'Caissier' %}
+            <div class="menu-item">
+                <a href="#">Opérations de Caisse</a>
+                <ul class="submenu">
+                    <li><a href="{% url 'rapport_caisse' %}">Rapport de Caisse</a></li>
+                    <li><a href="{% url 'encaissement' %}">Encaissement</a></li>
+                    <li><a href="{% url 'decaissement' %}">Décaissement</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if user.profil == "Administrateur" or user.profil == "Chef Agence" or user.profil == "Rapporteur" or user.profil == "Caissier" %}
+
+            <div class="menu-item">
+                <a href="#">Rapports</a>
+                    <ul class="submenu">
+                        {% if user.profil != 'Caissier' or user.profil == 'Administrateur' %}
+                            <li><a href="{% url 'transaction_interne' %}">Journal Transaction Interne</a></li>
+                            <li><a href="{% url 'compte_rendu_beac' %}">Compte-Rendu BEAC</a></li>
+                            <li><a href="{% url 'compte_rendu_dgmrfe' %}">Compte-Rendu DGMRFE</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'transaction_charge' %}">Journal Transaction des charges</a></li>
+                    </ul>
+            </div>
+            {% endif %}
+
+            {% if user.profil == "Administrateur" or user.profil == "Chef Agence" %}
+
+            <div class="menu-item">
+                <a href="#">Paramétrages</a>
+                <ul class="submenu">
+                    <li><a href="{% url 'parametrage:donnees_base' %}">Données de Base</a></li>
+                    <li><a href="{% url 'parametrage:creer_utilisateur' %}">Créer Utilisateur</a></li>
+                    <li><a href="{% url 'parametrage:maj_utilisateur' %}">Maj. Utilisateur</a></li>
+                    <li><a href="{% url 'parametrage:creer_agence' %}">Créer Agence</a></li>
+                    <li><a href="{% url 'parametrage:creer_caisse' %}">Créer Caisse</a></li>
+                    <li><a href="{% url 'parametrage:valider_donnees' %}">Valider Données</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="menu-item">
+                <a href="#">Profil Utilisateur</a>
+                <ul class="submenu">
+                    <li><a href="{% url 'change_mdp' %}">Changer Mot de Passe</a></li>
+                    <li><a href="{% url 'profil' %}">Profil</a></li>
+                </ul>
+            </div>
+
+            <a href="{% url 'connexion' %}" class="logout">Se déconnecter</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        @2025 - Tous droits réservés - NOGEX Technologies - Téléphone: +242 055400012 Pointe-Noire Congo
+    </footer>
+</body>
+</html>
